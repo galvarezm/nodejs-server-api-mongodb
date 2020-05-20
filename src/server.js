@@ -4,10 +4,11 @@
 require('./config');
 
 // ==============================================
-// :: node.js / express
+// :: node.js / express / mongoose
 // ==============================================
 const express = require('express');
 const app = express();
+const mongoose = require('mongoose');
 
 // ==============================================
 // :: definición de middlewares
@@ -26,6 +27,20 @@ app.use(bodyParser.json());
 // ==============================================
 const routes = require('./routes');
 app.use('/', routes);
+
+// ==============================================
+// :: conectar con base datos mongodb
+// ==============================================
+mongoose.connect('mongodb://localhost:27017/db-cafe', 
+    { 
+        useNewUrlParser: true, 
+        useUnifiedTopology: true 
+    }, 
+    (err, res) => {
+        if (err) throw err;
+        console.log('Data base mongodb is online.');
+    }
+);
 
 // ==============================================
 // :: iniciar servidor

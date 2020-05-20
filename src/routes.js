@@ -1,5 +1,11 @@
 const routes = require('express').Router();
 
+// encriptador de contraseñas
+const bcrypt = require('bcrypt');
+
+// modelos base datos
+const UserModel = require('./models/userModel');
+
 // ruta: raiz
 routes.get('/', function (req, res){
     res.json('*** NODE.JS - API SERVER WITH MONGODB ***!');
@@ -16,18 +22,57 @@ routes.post('/user', function (req, res){
     // recuperamos el formulario enviado gracias a body-parser
     let body = req.body;
 
-    // verificar datos del usuario
+    // verificar campos de entrada necesarios
     if ( body.name === undefined ){
-        // responder: ok
         res.status(400).json({
-            msg: 'bad request, the name is required.'
+            ok: false,
+            msg: 'bad request, name field is required.'
         });
-    }else{
-        // responder: error
-        res.json({
-            body
-        });
+        return;
     }
+    if ( body.email === undefined ){
+        res.status(400).json({
+            ok: false,
+            msg: 'bad request, email field is required.'
+        });
+        return;
+    }
+    if ( body.password === undefined ){
+        res.status(400).json({
+            ok: false,
+            msg: 'bad request, password field is required.'
+        });
+        return;
+    }
+
+    // nueva instancia del modelo de usuarios
+    let User = new UserModel({
+        name: body.name,
+        email: body.email,
+        password: bcrypt.hashSync(body.password, 10),
+        role: body.role,
+    });
+
+    // guardar nuevo usuario en la base de datos
+    User.save((err, userDB) => {
+
+        // verificar existencia de errores
+        if (err){
+            res.status(400).json({
+                ok: false,
+                msg: err,
+            });
+            return;
+        }
+
+        // responder: ok
+        res.json({
+            ok: true,
+            data: userDB
+        });
+
+    });
+
 
 });
 
