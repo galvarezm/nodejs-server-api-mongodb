@@ -34,7 +34,8 @@ app.use('/', routes);
 mongoose.connect('mongodb://localhost:27017/db-cafe', 
     { 
         useNewUrlParser: true, 
-        useUnifiedTopology: true 
+        useUnifiedTopology: true,
+        useCreateIndex: true, 
     }, 
     (err, res) => {
         if (err) throw err;
