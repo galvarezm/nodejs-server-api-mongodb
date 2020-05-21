@@ -22,7 +22,7 @@ routes.get('/user', function (req, res){
     let page_to = req.query.page_to || 5; // opcional
 
     // consultar modelo de usuarios y retornar datos por página
-    UserModel.find({}, 'name role img status google')
+    UserModel.find({status: true}, 'name role img status google')
     .skip(parseInt(page_from))
     .limit(parseInt(page_to))
     .exec((err, users) => {
@@ -44,6 +44,7 @@ routes.get('/user', function (req, res){
         });
 
     });
+
 });
 
 // ruta: crear un usuario

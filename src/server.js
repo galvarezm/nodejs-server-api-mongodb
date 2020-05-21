@@ -31,7 +31,8 @@ app.use('/', routes);
 // ==============================================
 // :: conectar con base datos mongodb
 // ==============================================
-mongoose.connect('mongodb://localhost:27017/db-cafe', 
+console.log(process.env.URI_DATA_BASE);
+mongoose.connect(process.env.URI_DATA_BASE, 
     { 
         useNewUrlParser: true, 
         useUnifiedTopology: true,
@@ -48,5 +49,5 @@ mongoose.connect('mongodb://localhost:27017/db-cafe',
 // ==============================================
 app.listen(process.env.PORT, () => {
     console.log('***');
-    console.log(`Server listening on port ${process.env.PORT}...`);
+    console.log(`Server listening on port ${process.env.PORT} on mode ${ process.env.NODE_ENV.toUpperCase() }.`);
 });
