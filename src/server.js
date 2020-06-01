@@ -25,8 +25,10 @@ app.use(bodyParser.json());
 // ==============================================
 // :: rutas del servidor
 // ==============================================
-const routes = require('./routes');
-app.use('/', routes);
+const userRoutes = require('./routes/user');
+const loginRoutes = require('./routes/login');
+app.use('/', userRoutes);
+app.use('/', loginRoutes);
 
 // ==============================================
 // :: conectar con base datos mongodb
