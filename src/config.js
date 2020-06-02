@@ -4,6 +4,9 @@ process.env.PORT = process.env.PORT || 3000;
 // jw-token: tiempo de expiracion
 process.env.TOKEN_EXP = (60 * 60 * 24 * 30); // equivalente a => ( seg * min * horas * dias )
 
+// cliente id para google sign in (si no esta definido ponemos uno por default)
+process.env.GOOGLE_CLIENTE_ID = process.env.GOOGLE_CLIENTE_ID || '478179655855-u4iouq6il3i969cpf7aecl75rthfqnb8.apps.googleusercontent.com';
+
 // entorno (desarrollo / produccion) *heroku usa esta variable de entorno.
 process.env.NODE_ENV = process.env.NODE_ENV || 'dev';
 

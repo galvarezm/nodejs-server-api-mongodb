@@ -9,6 +9,7 @@ require('./config');
 const express = require('express');
 const app = express();
 const mongoose = require('mongoose');
+const path = require('path');
 
 // ==============================================
 // :: definición de middlewares
@@ -29,6 +30,11 @@ const userRoutes = require('./routes/user');
 const loginRoutes = require('./routes/login');
 app.use('/', userRoutes);
 app.use('/', loginRoutes);
+
+// ==============================================
+// :: habilitar paginas en el servidor
+// ==============================================
+app.use( express.static( path.resolve( __dirname, './public' ) ) );
 
 // ==============================================
 // :: conectar con base datos mongodb
