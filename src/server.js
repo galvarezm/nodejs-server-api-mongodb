@@ -28,8 +28,10 @@ app.use(bodyParser.json());
 // ==============================================
 const userRoutes = require('./routes/user');
 const loginRoutes = require('./routes/login');
+const categoryRoutes = require('./routes/categories');
 app.use('/', userRoutes);
 app.use('/', loginRoutes);
+app.use('/', categoryRoutes);
 
 // ==============================================
 // :: habilitar paginas en el servidor

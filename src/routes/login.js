@@ -120,7 +120,7 @@ routes.post('/google_signin', async (req, res) => {
         // verificar usuario encontrado
         if ( userDB ){
             // caso: usuario encontrado
-console.log('userDB', userDB);
+
             // verificar si se trata de un usuario google anteriormente creado
             if ( !userDB.google ){
                 // caso: debe hacer login por el sistema tradicional
